@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Пример работы c Cookies</title>
+  <script type="text/javascript" src="js/myCookieUtil.js"></script>
+  <script type="text/javascript" src="js/myEventUtil.js"></script>
+</head>
+
+<body>
+
+  <p>ФИО студента: <span id="name-value">(none)</span><br />
+    Возраст: <span id="age-value">(none)</span><br />
+    Оценка за экзамен: <span id="grade-value">(none)</span></p>
+  <input type="button" value="Удалить файлы cookie" id="delete-btn" />
+  <p>Обновите страницу в браузере, чтобы увидеть значения. Нажмите кнопку &quot; Удалить файлы
+    cookie&quot; для их удаления.</p>
+
+  <script type="text/javascript">
+    /**Наберите в VSCode следующий код, в котором Вы попробуете поработать с файлами cookie на вашем компьютере. 
+Измените данные студента (ФИО, Возраст и Оценку на свои). Сохраните полученный результат под именем index75.html 
+в папке и откройте (запустите) его поочередно в следующих браузерах: Google Chrome, Opera, Yandex Browser, Mozilla 
+Firefox, Safari, Internet Explorer (Microsoft Edge) - напишите в письме с ссылкой на репозиторий, в каком браузере из 
+перечисленных файл работает, а в каком нет и почему! Что нужно изменить в сценарии основного файла и\или 
+подключаемых вспомогательных сценариев, чтобы файл заработал везде?
+
+*/
+    myEventUtil.addHandler(window, "load", function () {
+      document.getElementById("name-value").innerHTML = myCookieUtil.get("сname");
+      document.getElementById("age-value").innerHTML = myCookieUtil.get("age");
+      document.getElementById("grade-value").innerHTML = myCookieUtil.get("grade");
+
+      myEventUtil.addHandler(document.getElementById("delete-btn"), "click", function () {
+        //удаление cookie-файлов
+        myCookieUtil.unset("сname");
+        myCookieUtil.unset("age");
+        myCookieUtil.unset("grade");
+      });
+      //задание cookie-файла с ФИО студента, возрастом и оценкой
+      myCookieUtil.set("сname", "Кузнецов СН");
+      myCookieUtil.set("age", "39");
+      myCookieUtil.set("grade", "8");
+    });
+
+  </script>
+</body>
+
+</html>
